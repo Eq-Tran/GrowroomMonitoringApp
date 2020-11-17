@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 import Adafruit_DHT
 import time
+import picamera
 
 DHT_SENSOR = Adafruit_DHT.DHT11
 SENSOR_PIN = 4
@@ -11,11 +12,7 @@ app = Flask(__name__)
 # can have multiple route() calls
 @app.route('/')
 def index():
-    #humidity,temperature = Adafruit_DHT.read(DHT_SENSOR,SENSOR_PIN)
-    #sensor_data = {"temp": temperature,"humidity": humidity}
-    
-
-    #print(sensor_data)
+    #index page this is the root file
     return render_template("index.html")
 
 @app.route('/progress')
