@@ -1,0 +1,41 @@
+<html>
+	<head>
+	<meta charset="UTF-8"/>
+	<link type="text/css" rel="stylesheet" href="/static/style.css">
+	</head>
+	<body onload="loadTemp()">
+	<div class="header-class">
+		<h1>Grow Room Monitoring System Home Page</h1>
+	</div>
+		
+	<div class="main-class">
+		<p>Temperature:</p><p id="temp"></p>
+		<p>Humidity:</p><p id="humidity"></p>
+	</div>
+	</body>
+	<script type="text/javascript" >
+
+	function loadTemp(){
+		console.clear()
+		let url = "/progress"
+
+		fetch(url)
+		.then(response => response.json())
+		.then(data =>{
+			var id = document.getElementById("temp");
+			var humidity = document.getElementById("humidity");
+			if(data.temp == null || data.humidity == null){
+				
+				id.innerHTML = "0°F"
+				humidity.innerHTML = "0%"
+			}else{
+	
+				id.innerHTML = data.temp + "°F";
+				humidity.innerHTML = data.humidity + "%";
+			}
+			// update temp every 30 seconds
+			var updateTemp = setTimeout(function(){loadTemp()}, 30000);
+	});
+}
+</script>
+</html>
